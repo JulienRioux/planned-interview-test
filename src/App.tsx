@@ -1,23 +1,15 @@
-import React from "react";
-import styled from "styled-components";
+import * as React from "react";
 
-const API_URL = "http://localhost:8099";
+import { UsersPage } from "./pages/users";
+import { API_URL } from "./configs";
+import { ProvidersWrapper } from "./state/reduce-providers";
 
 function App() {
   return (
     <div className="App">
-      <h1>Planned Test</h1>
-      <div>
-        <button type="button">Retrieve Users</button>
-      </div>
-      <div>
-        <h2>Users</h2>
-        min:{" "}
-        <input name="minAge" value="0" type="number" onChange={() => null} />
-        max:{" "}
-        <input name="maxAge" value="100" type="number" onChange={() => null} />
-        <button type="button">Filter by age</button>
-      </div>
+      <ProvidersWrapper>
+        <UsersPage />
+      </ProvidersWrapper>
     </div>
   );
 }
