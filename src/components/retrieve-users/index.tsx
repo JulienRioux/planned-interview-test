@@ -7,7 +7,8 @@ import { RetrieveUserForm } from "./styles";
 import { useUsers } from "../../hooks/use-users";
 
 const RetrieveUsers = () => {
-  const { isLoading, getUsers } = useUsers();
+  const { isLoading, getUsers, handleMinMaxAgeChange, minAge, maxAge } =
+    useUsers();
 
   const handleSubmit = useCallback(
     (e) => {
@@ -22,20 +23,27 @@ const RetrieveUsers = () => {
       <RetrieveUserForm onSubmit={handleSubmit}>
         <Input
           name="minAge"
-          value="0"
+          value={minAge}
           type="number"
-          onChange={() => null}
+          onChange={handleMinMaxAgeChange}
           leftText="Min"
+          min={0}
+          max={maxAge}
+          required
         />
         <Input
           name="maxAge"
-          value="100"
+          value={maxAge}
           type="number"
-          onChange={() => null}
+          onChange={handleMinMaxAgeChange}
           leftText="Max"
+          min={minAge}
+          required
         />
         <div>
-          <Button type="submit">Retrieve Users</Button>
+          <Button loading={isLoading} type="submit">
+            Retrieve Users
+          </Button>
         </div>
       </RetrieveUserForm>
     </Card>

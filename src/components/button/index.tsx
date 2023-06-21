@@ -3,6 +3,14 @@ import { FunctionComponent } from "react";
 import { ButtonComponent } from "./styles";
 import { ButtonProps } from "./types";
 
-export const Button: FunctionComponent<ButtonProps> = ({ ...props }) => {
-  return <ButtonComponent {...props} />;
+export const Button: FunctionComponent<ButtonProps> = ({
+  loading,
+  children,
+  ...props
+}) => {
+  return (
+    <ButtonComponent $loading={loading} {...props}>
+      {loading ? "Loading..." : children}
+    </ButtonComponent>
+  );
 };

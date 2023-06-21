@@ -1,27 +1,30 @@
 import * as React from "react";
 import { createContext, useCallback, useEffect, useState } from "react";
-import { IUsersContext, UserProviderProps } from "./types";
+import { IUser, IUsersContext, UserProviderProps } from "./types";
 import { API_URL, USER_ROUTES } from "../../configs";
 import { sortUsers } from "../../utils/sort";
+import { formatUser } from "../../utils/format-user";
 
 export const UsersContext = createContext<IUsersContext>(
   {} as any as IUsersContext
 );
 
-// TODO: Move it inside utils
-const formatUser = (
-  { name: { firstName, lastName }, age }: any,
-  index: number
-) => ({
-  name: `${firstName} ${lastName}`,
-  age,
-  // Creating an ID since there is no one from the API
-  uid: `${firstName} ${lastName}-${age}-${index}`,
-});
-
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<IUser[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  // Handling the min and max age
+  const [minAge, setMinAge] = useState(0);
+  const [maxAge, setMaxAge] = useState(100);
+
+  const handleMinMaxAgeChange = useCallback((e) => {
+    // TODO: Deal with min and max overlapping...
+    if (e.target.name === "minAge") {
+      setMinAge(e.target.value);
+    }
+    if (e.target.name === "maxAge") {
+      setMaxAge(e.target.value);
+    }
+  }, []);
 
   const getUsers = useCallback(async () => {
     setIsLoading(true);
@@ -47,9 +50,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       );
       const allUsers = [...kids, ...adults, ...seniors];
 
-      const sortedUsers = sortUsers(allUsers);
+      // TODO: Do this while sorting...
+      // Filter users based on minAge and maxAge
+      const usersFilteredByAge = allUsers.filter(
+        ({ age }) => age >= minAge && age <= maxAge
+      );
 
-      setUsers(sortedUsers);
+      const sortedAndFilteredUsers = sortUsers(usersFilteredByAge);
+
+      setUsers(sortedAndFilteredUsers);
     } catch (err) {
       console.log("Error:", err);
     } finally {
@@ -57,7 +66,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     setIsLoading(false);
-  }, []);
+  }, [maxAge, minAge]);
 
   const FETCH_USER_ON_LOAD = false;
 
@@ -73,8 +82,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       isLoading,
       users,
       getUsers,
+      handleMinMaxAgeChange,
+      minAge,
+      maxAge,
     };
-  }, [getUsers, isLoading, users]);
+  }, [isLoading, users, getUsers, handleMinMaxAgeChange, minAge, maxAge]);
 
   return (
     <UsersContext.Provider value={getCtx()}>{children}</UsersContext.Provider>

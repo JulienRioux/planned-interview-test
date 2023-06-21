@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Input } from "../../components/input";
 import { Layout } from "../../components/layout";
 import { UsersPageWrapper } from "./styles";
 import RetrieveUsers from "../../components/retrieve-users";

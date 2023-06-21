@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { FormEvent, ReactNode } from "react";
 
 export interface UserProviderProps {
   children: ReactNode;
@@ -14,4 +14,7 @@ export interface IUsersContext {
   isLoading: boolean;
   users: IUser[];
   getUsers: () => void;
+  handleMinMaxAgeChange: (e: FormEvent<HTMLInputElement>) => void;
+  minAge: number;
+  maxAge: number;
 }
