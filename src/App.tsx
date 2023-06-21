@@ -1,8 +1,7 @@
 import * as React from "react";
 
 import { UsersPage } from "./pages/users";
-import { API_URL } from "./configs";
-import { ProvidersWrapper } from "./state/reduce-providers";
+import { ProvidersWrapper } from "./states/reduce-providers";
 
 function App() {
   return (
