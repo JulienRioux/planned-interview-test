@@ -9,16 +9,21 @@ export const UsersContext = createContext<IUsersContext>(
 );
 
 // TODO: Move it inside utils
-const formatUser = ({ name: { firstName, lastName }, age }: any) => ({
+const formatUser = (
+  { name: { firstName, lastName }, age }: any,
+  index: number
+) => ({
   name: `${firstName} ${lastName}`,
-  age: age,
+  age,
+  // Creating an ID since there is no one from the API
+  uid: `${firstName} ${lastName}-${age}-${index}`,
 });
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchUsers = useCallback(async () => {
+  const getUsers = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -28,11 +33,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         routesToFetch.map(async (url, index) => {
           const resp = await fetch(url);
           const fetchedUser = await resp.json();
+          // TODO: refactor this
           // Formatting the users before storing them.
           if (index === 2) {
-            return fetchedUser.map((user: any) => formatUser(user));
+            return fetchedUser.map((user: any, index: number) =>
+              formatUser(user, index)
+            );
           }
-          return fetchedUser.data.map((user: any) => formatUser(user));
+          return fetchedUser.data.map((user: any, index: number) =>
+            formatUser(user, index)
+          );
         })
       );
       const allUsers = [...kids, ...adults, ...seniors];
@@ -49,17 +59,22 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setIsLoading(false);
   }, []);
 
+  const FETCH_USER_ON_LOAD = false;
+
   useEffect(() => {
-    // Fetching users from start
-    fetchUsers();
-  }, [fetchUsers]);
+    if (FETCH_USER_ON_LOAD) {
+      // Fetching users from start
+      getUsers();
+    }
+  }, [FETCH_USER_ON_LOAD, getUsers]);
 
   const getCtx = useCallback(() => {
     return {
       isLoading,
       users,
+      getUsers,
     };
-  }, [isLoading, users]);
+  }, [getUsers, isLoading, users]);
 
   return (
     <UsersContext.Provider value={getCtx()}>{children}</UsersContext.Provider>

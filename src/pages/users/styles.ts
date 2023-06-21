@@ -5,8 +5,3 @@ export const UsersPageWrapper = styled.div`
   grid-template-columns: 1fr 2fr;
   gap: 40px;
 `;
-
-export const RetrieveUserForm = styled.form`
-  display: grid;
-  gap: 20px;
-`;
