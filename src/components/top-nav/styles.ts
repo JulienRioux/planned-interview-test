@@ -8,6 +8,7 @@ export const TopNavWrapper = styled.div`
   position: sticky;
   top: 0;
   background: #fff;
+  z-index: 9;
 `;
 
 export const Img = styled.img`
