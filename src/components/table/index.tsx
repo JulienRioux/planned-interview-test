@@ -14,6 +14,8 @@ const TableWrapper = styled.div`
   }
 
   tr {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr;
     border-bottom: 1px solid #0001;
 
     &:last-of-type {
@@ -53,21 +55,3 @@ export const Table = ({
     </TableWrapper>
   );
 };
-
-const MARGIN = 24;
-const HEIGHT = 24;
-
-// export const TableSkeleton = ({ rows = 6 }) => (
-//   <div>
-//     <Skeleton height={40} radius="xs" mb={16} />
-
-//     {Array.from(Array(rows).keys()).map((row) => (
-//       <Flex gap="20px" key={row}>
-//         <Skeleton height={HEIGHT} radius="xs" mt={MARGIN} mb={MARGIN} />
-//         <Skeleton height={HEIGHT} radius="xs" mt={MARGIN} mb={MARGIN} />
-//         <Skeleton height={HEIGHT} radius="xs" mt={MARGIN} mb={MARGIN} />
-//         <Skeleton height={HEIGHT} radius="xs" mt={MARGIN} mb={MARGIN} />
-//       </Flex>
-//     ))}
-//   </div>
-// )

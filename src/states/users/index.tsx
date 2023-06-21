@@ -9,14 +9,21 @@ export const UsersContext = createContext<IUsersContext>(
   {} as any as IUsersContext
 );
 
-export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  // Handling the min and max age
-  const [minAge, setMinAge] = useState(0);
-  const [maxAge, setMaxAge] = useState(100);
+const [INITIAL_MIN_AGE, INITIAL_MAX_AGE] = [0, 100];
 
-  const handleMinMaxAgeChange = useCallback((e) => {
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+  // This is the data coming from the API (Will not changed unless re-trigerring the "Retrieve Users" button.)
+  const [users, setUsers] = useState<IUser[]>([]);
+  // This is the filtered dataset
+  const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  // Handling the min/max age and text search filters
+  const [minAge, setMinAge] = useState(INITIAL_MIN_AGE);
+  const [maxAge, setMaxAge] = useState(INITIAL_MAX_AGE);
+  const [searchText, setSearchText] = useState("");
+
+  const handleFiltersChange = useCallback((e) => {
     // TODO: Deal with min and max overlapping...
     if (e.target.name === "minAge") {
       setMinAge(e.target.value);
@@ -24,10 +31,26 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     if (e.target.name === "maxAge") {
       setMaxAge(e.target.value);
     }
+    if (e.target.name === "searchText") {
+      setSearchText(e.target.value);
+    }
+  }, []);
+
+  const handleMinMaxBlur = useCallback((e) => {
+    // Make sure the data are always in a good state
+    if (e.target.name === "minAge" && e.target.value === "") {
+      setMinAge(INITIAL_MIN_AGE);
+    }
+    if (e.target.name === "maxAge" && e.target.value === "") {
+      setMaxAge(INITIAL_MAX_AGE);
+    }
   }, []);
 
   const getUsers = useCallback(async () => {
     setIsLoading(true);
+    // Reset the data when refetching new users
+    setUsers([]);
+    setFilteredUsers([]);
 
     try {
       const routesToFetch = USER_ROUTES.map((route) => `${API_URL}${route}`);
@@ -50,14 +73,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       );
       const allUsers = [...kids, ...adults, ...seniors];
 
-      // TODO: Do this while sorting...
-      // Filter users based on minAge and maxAge
-      const usersFilteredByAge = allUsers.filter(
-        ({ age }) => age >= minAge && age <= maxAge
-      );
+      const sortedAndFilteredUsers = sortUsers(allUsers);
 
-      const sortedAndFilteredUsers = sortUsers(usersFilteredByAge);
-
+      // Init the users coming from the API and the filtered list
       setUsers(sortedAndFilteredUsers);
     } catch (err) {
       console.log("Error:", err);
@@ -66,7 +84,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     setIsLoading(false);
-  }, [maxAge, minAge]);
+  }, []);
+
+  // Deal with filters
+  useEffect(() => {
+    // Filter users based on minAge and maxAge
+    const usersFilteredByAge = users.filter(
+      ({ age }) => age >= minAge && age <= maxAge
+    );
+    // Filter based on the search text
+    const filteredByText = usersFilteredByAge.filter((obj) =>
+      obj.name.toLowerCase().includes(searchText)
+    );
+    setFilteredUsers(filteredByText);
+  }, [maxAge, minAge, searchText, users]);
 
   const FETCH_USER_ON_LOAD = false;
 
@@ -80,13 +111,24 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const getCtx = useCallback(() => {
     return {
       isLoading,
-      users,
+      users: filteredUsers,
       getUsers,
-      handleMinMaxAgeChange,
+      handleFiltersChange,
       minAge,
       maxAge,
+      searchText,
+      handleMinMaxBlur,
     };
-  }, [isLoading, users, getUsers, handleMinMaxAgeChange, minAge, maxAge]);
+  }, [
+    isLoading,
+    filteredUsers,
+    getUsers,
+    handleFiltersChange,
+    minAge,
+    maxAge,
+    searchText,
+    handleMinMaxBlur,
+  ]);
 
   return (
     <UsersContext.Provider value={getCtx()}>{children}</UsersContext.Provider>

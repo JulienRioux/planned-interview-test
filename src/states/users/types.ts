@@ -14,7 +14,9 @@ export interface IUsersContext {
   isLoading: boolean;
   users: IUser[];
   getUsers: () => void;
-  handleMinMaxAgeChange: (e: FormEvent<HTMLInputElement>) => void;
   minAge: number;
   maxAge: number;
+  searchText: string;
+  handleFiltersChange: (e: FormEvent<HTMLInputElement>) => void;
+  handleMinMaxBlur: (e: FormEvent<HTMLInputElement>) => void;
 }

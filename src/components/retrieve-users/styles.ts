@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const RetrieveUserForm = styled.form`
+export const RetrieveUsersWrapper = styled.div`
   display: grid;
   gap: 20px;
 `;
