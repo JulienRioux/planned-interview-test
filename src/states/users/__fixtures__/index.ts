@@ -1,6 +1,6 @@
 // Fixtures used in our tests.
 
-export const KIDS_DATA = {
+export const KIDS_MOCKED_DATA = {
   data: [
     {
       age: 6,
@@ -23,7 +23,7 @@ export const KIDS_DATA = {
   ],
 };
 
-export const ADULTS_DATA = {
+export const ADULTS_MOCKED_DATA = {
   data: [
     {
       age: 25,
@@ -46,7 +46,7 @@ export const ADULTS_DATA = {
   ],
 };
 
-export const SENIORS_DATA = [
+export const SENIORS_MOCKED_DATA = [
   {
     age: 87,
     country: "Namibia",

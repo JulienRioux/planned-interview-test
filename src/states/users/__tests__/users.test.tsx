@@ -7,25 +7,26 @@ import { FormEvent } from "react";
 import { useUsers } from "../../../hooks/use-users";
 import { UserProvider } from "..";
 import {
-  ADULTS_DATA,
+  ADULTS_MOCKED_DATA,
   FILTER_1_USERS_RESULT,
   FILTER_2_USERS_RESULT,
   FILTER_3_USERS_RESULT,
-  KIDS_DATA,
-  SENIORS_DATA,
+  KIDS_MOCKED_DATA,
+  SENIORS_MOCKED_DATA,
   SORTED_USERS,
 } from "../__fixtures__";
 import { UserProviderProps } from "../types";
+import { routes } from "../../../configs";
 
 global.fetch = jest.fn().mockImplementation((url: string) => {
-  if (url === "http://localhost:8099/users/kids") {
-    return { json: () => KIDS_DATA };
+  if (url === routes.users.kids) {
+    return { json: () => KIDS_MOCKED_DATA };
   }
-  if (url === "http://localhost:8099/users/adults") {
-    return { json: () => ADULTS_DATA };
+  if (url === routes.users.adults) {
+    return { json: () => ADULTS_MOCKED_DATA };
   }
-  if (url === "http://localhost:8099/users/seniors") {
-    return { json: () => SENIORS_DATA };
+  if (url === routes.users.seniors) {
+    return { json: () => SENIORS_MOCKED_DATA };
   }
 });
 

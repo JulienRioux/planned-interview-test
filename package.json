@@ -11,7 +11,7 @@
     "start": "npm-run-all --parallel start:client start:server",
     "start:client": "react-scripts --openssl-legacy-provider start",
     "start:server": "node server/server.js",
-    "test": "jest --watch "
+    "test": "jest --watchAll "
   },
   "dependencies": {
     "@testing-library/react": "^11.0.1",
