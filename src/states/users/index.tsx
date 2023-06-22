@@ -24,7 +24,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [searchText, setSearchText] = useState("");
 
   const handleFiltersChange = useCallback((e) => {
-    // TODO: Deal with min and max overlapping...
     if (e.target.name === "minAge") {
       setMinAge(e.target.value);
     }

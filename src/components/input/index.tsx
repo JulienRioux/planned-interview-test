@@ -4,6 +4,8 @@ import { InputComponent, InputWrapper, LeftText } from "./styles";
 import { InputProps } from "./types";
 import { IconSearch } from "../icons/search";
 
+export const SEARCH_ICON_SIZE = 16;
+
 export const Input: FunctionComponent<InputProps> = ({
   leftText,
   ...props
@@ -12,7 +14,7 @@ export const Input: FunctionComponent<InputProps> = ({
     <InputWrapper>
       {props.type === "search" && !leftText && (
         <LeftText data-testid="input-search-icon">
-          <IconSearch />
+          <IconSearch size={SEARCH_ICON_SIZE} />
         </LeftText>
       )}
       {leftText && (

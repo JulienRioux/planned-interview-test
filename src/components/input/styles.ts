@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { token } from "../../theme";
+import { SEARCH_ICON_SIZE } from ".";
+
+const LEFT_TEXT_PADDING = 8;
+const LEFT_TEXT_WIDTH = 36;
 
 export const InputComponent = styled.input<{
   $hasSearchIcon?: boolean;
@@ -23,12 +27,15 @@ export const InputComponent = styled.input<{
     color: ${token("$input-placeholder-color")};
   }
 
-  // TODO: Make this a variable
-  // 16 (icon width) + 8 (padding-left) + 8 (padding-right)
-  ${(p) => p.$hasSearchIcon && "padding-left: 32px;"}
+  // SEARCH_ICON_SIZE + LEFT_TEXT_PADDING * 2 (padding-left & padding-right)
+  ${(p) =>
+    p.$hasSearchIcon &&
+    `padding-left: ${SEARCH_ICON_SIZE + LEFT_TEXT_PADDING * 2}px;`}
 
-  // 36 (icon width) + 8 (padding-left) + 8 (padding-right)
-  ${(p) => p.$hasLeftText && "padding-left: 52px;"}
+  // LEFT_TEXT_WIDTH + LEFT_TEXT_PADDING * 2 (padding-left & padding-right)
+  ${(p) =>
+    p.$hasLeftText &&
+    `padding-left: ${LEFT_TEXT_WIDTH + LEFT_TEXT_PADDING * 2}px`}
 `;
 
 export const InputWrapper = styled.div`
@@ -39,6 +46,9 @@ export const LeftText = styled.div`
   font-size: ${token("$input-font-size")};
   color: ${token("$input-placeholder-color")};
 
+  padding: ${LEFT_TEXT_PADDING}px;
+  width: ${LEFT_TEXT_WIDTH}px;
+
   position: absolute;
   top: 0;
   bottom: 0;
@@ -46,7 +56,5 @@ export const LeftText = styled.div`
   display: flex;
   align-items: center;
   jusitify-content: center;
-  padding: 8px;
-  width: 36px;
   pointer-events: none;
 `;

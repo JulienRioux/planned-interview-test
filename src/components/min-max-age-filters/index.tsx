@@ -1,9 +1,13 @@
 import * as React from "react";
 import { Input } from "../input";
 import { useUsers } from "../../hooks/use-users";
+import Alert from "../alert";
 
 const MinMaxAgeFilters = () => {
   const { handleFiltersChange, minAge, maxAge, handleMinMaxBlur } = useUsers();
+
+  // Show a simple alert message when a the minAge is > than the maxAge
+  const HAS_ERROR = Number(minAge) > Number(maxAge);
 
   return (
     <>
@@ -25,6 +29,8 @@ const MinMaxAgeFilters = () => {
         min={0}
         onBlur={handleMinMaxBlur}
       />
+
+      {HAS_ERROR && <Alert>Error: Min age is higher than max age.</Alert>}
     </>
   );
 };
