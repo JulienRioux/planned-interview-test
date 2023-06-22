@@ -107,18 +107,6 @@ export const theme: DefaultTheme = {
   "$table.thead-font-weight": "bold",
 };
 
-type Path<T extends string> = T extends "" ? "" : `.${T}`;
-
-type PathsOf<T> = (
-  T extends object
-    ? {
-        [K in Exclude<keyof T, symbol>]: `${K}${Path<PathsOf<T[K]>>}`;
-      }[Exclude<keyof T, symbol>]
-    : ""
-) extends infer D
-  ? Extract<D, string>
-  : never;
-
 interface StyledComponentProps {
   theme: DefaultTheme;
 }

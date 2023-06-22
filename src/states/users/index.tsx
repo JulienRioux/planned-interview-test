@@ -11,7 +11,7 @@ export const UsersContext = createContext<IUsersContext>(
 
 const [INITIAL_MIN_AGE, INITIAL_MAX_AGE] = [0, 100];
 
-export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+export const UserProvider = ({ children }: UserProviderProps) => {
   // This is the data coming from the API (Will not changed unless re-trigerring the "Retrieve Users" button.)
   const [users, setUsers] = useState<IUser[]>([]);
   // This is the filtered dataset
@@ -53,12 +53,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setFilteredUsers([]);
 
     try {
+      // TODO: Make this better
       const routesToFetch = USER_ROUTES.map((route) => `${API_URL}${route}`);
 
       const [kids, adults, seniors] = await Promise.all(
         routesToFetch.map(async (url, index) => {
           const resp = await fetch(url);
           const fetchedUser = await resp.json();
+
           // TODO: refactor this
           // Formatting the users before storing them.
           if (index === 2) {
@@ -78,6 +80,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       // Init the users coming from the API and the filtered list
       setUsers(sortedAndFilteredUsers);
     } catch (err) {
+      // Do something with the log.
       console.log("Error:", err);
     } finally {
       setIsLoading(false);
