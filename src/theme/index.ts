@@ -1,5 +1,7 @@
 import { DefaultTheme } from "styled-components";
+import { StyledComponentProps } from "./types";
 
+/** Color tokens. */
 export enum ColorToken {
   Black = "#000000",
   Black100 = "#00000011",
@@ -8,8 +10,11 @@ export enum ColorToken {
   Green = "#52a27d",
   White = "#ffffff",
   Transparent = "transparent",
+  Red100 = "#fff5f5",
+  Red500 = "#fa525244",
 }
 
+/** Size tokens. */
 export enum SizeToken {
   // PX
   Size1px = "1px",
@@ -25,49 +30,17 @@ export enum SizeToken {
   Size2rem = "2rem",
 }
 
-declare module "styled-components" {
-  export interface DefaultTheme {
-    // Button
-    "$button-default-bg-color": ColorToken;
-    "$button-default-color": ColorToken;
-    "$button-default-border": string;
-    "$button-default-padding": string;
-    "$button-default-border-radius": SizeToken;
-    "$input:focus-border-color": ColorToken;
-
-    // Card
-    "$card-padding": SizeToken;
-    "$card-bg-color": ColorToken;
-    "$card-border-radius": SizeToken;
-    "$card-box-shadow": string;
-    "$card-border": string;
-
-    // Checkbox
-    "$checkbox-border": string;
-    "$checkbox-border-radius": SizeToken;
-    "$checkbox-size": SizeToken;
-    "$checkbox-accent-color": ColorToken;
-
-    // Input
-    "$input-border": string;
-    "$input-background": ColorToken;
-    "$input-border-radius": SizeToken;
-    "$input-padding": string;
-    "$input-placeholder-color": ColorToken;
-    "$input-font-size": SizeToken;
-
-    // Media queries
-    "$media-query-large": SizeToken;
-
-    // Table
-    "$table-font-size": SizeToken;
-    "$table-text-align": "auto" | "left" | "right" | "center";
-    "$table-border": string;
-    "$table.thead-font-weight": string;
-  }
-}
-
+/** Setting up a theme object to use a tokenize approach when styling compnents for
+ * a better usability and to help with styling consistency over the app.
+ * */
 export const theme: DefaultTheme = {
+  // Alert
+  "$alert-bg-color": ColorToken.Red100,
+  "$alert-border": `${SizeToken.Size1px} solid ${ColorToken.Red500}`,
+  "$alert-padding": SizeToken.Size8px,
+  "$alert-border-radius": SizeToken.Size8px,
+  "$alert-font-size": SizeToken.Size14px,
+
   // Button
   "$button-default-bg-color": ColorToken.Green,
   "$button-default-color": ColorToken.White,
@@ -107,10 +80,7 @@ export const theme: DefaultTheme = {
   "$table.thead-font-weight": "bold",
 };
 
-interface StyledComponentProps {
-  theme: DefaultTheme;
-}
-
+/** Use the token() function to easily import design tokens inside styled-components.  */
 export const token =
   (key: keyof DefaultTheme) => (props: StyledComponentProps) =>
     props.theme[key];
