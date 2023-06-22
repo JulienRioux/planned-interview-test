@@ -2,7 +2,8 @@
 
 Here is my coding interview assessment. You can watch the following video demonstrating the functionality of the app. I have modularized the components to optimize reusability and made efforts to enhance efficiency wherever possible.
 
-https://github.com/JulienRioux/planned-interview/assets/26312935/578fec99-1d58-4d25-b840-37a695b04228
+https://github.com/JulienRioux/planned-interview-test/assets/26312935/786852db-b2a9-4740-aaa2-4b14a8fca27b
+
 
 ## Files structure
 
