@@ -10,12 +10,29 @@ const NoDataText = styled.div`
   color: #8c9aad;
 `;
 
+const TABLE_COLUMNS = [
+  {
+    content: "",
+    key: "checkbox",
+  },
+  {
+    content: "Name",
+    key: "name",
+    sorter: () => console.log("Sorting by names..."),
+  },
+  {
+    content: "Age",
+    key: "age",
+    sorter: () => console.log("Sorting by ages..."),
+  },
+];
+
 export const UsersTable = () => {
   const { isLoading, users } = useUsers();
 
   return users.length ? (
     <Table
-      columns={["", "Name", "Age"]}
+      columns={TABLE_COLUMNS}
       rows={users.map(({ name, age, uid }: any, index: number) => (
         <tr key={uid}>
           <td>
