@@ -1,39 +1,29 @@
-# Planned Interview Test
+# Planned interview test
 
-For this test, you will need to retrieve users from 3 different api endpoints. You will then need to order those users by name (firstName + lastName) *ascending* and if multiple people have the same name, order them by age *descending*.
+Here is my coding interview assessment. You can watch the following video demonstrating the functionality of the app. I have modularized the components to optimize reusability and made efforts to enhance efficiency wherever possible.
 
-So you would have a list like this one:
+https://github.com/JulienRioux/planned-interview/assets/26312935/578fec99-1d58-4d25-b840-37a695b04228
 
-```
-Alex B - 32
-Marc C - 55
-Marc C - 12
-Tony Z - 21
-```
+## Files structure
 
-The design of your project should match the below image. You will find the necessary assets in the public folder of the project.
+The components are divided into three separate files. For example, the button component resides within the `src/component/button folder`. The primary logic is contained in the `src/component/button/index` file, the styles are located in the `src/component/button/styles` file, and the types are defined in the `src/component/button/types` file. Most of the reusable components are structured as above.
 
-![alt text](https://github.com/entr-engineering/interview-test/blob/master/public/design.png)
+## Users fetching and filtering
 
-## Run the project
+Regarding the fetching and filtering of users, all the logic is centralized within the `use-users` hook, and the state is stored in the `src/states/users/index` file.
 
-Make sure you have node 12+ installed
+## Testing
 
-`npm i && npm start`
+I have included two test suites in the project for the `use-users` hook and the `input` component, as they contain more complex functionality. Although there aren't numerous tests, these two tests showcase my testing skills effectively.
 
-## Endpoints
+To run the tests, you can use the command `yarn test` or `yarn jest --watchAll`.
 
-- http://localhost/users/kids
-- http://localhost/users/adults
-- http://localhost/users/seniors
+I had to add a few package to do so and update a few package in order to make everything works. Please note that I did not upgrade all packages and did not use all the latest package available. For a production app, I would have upgrade most of the package since the repo is +/- 3 years old but I think it's ok for this demo.
 
-**(do not modify those endpoints)
+<img width="811" alt="" src="https://github.com/JulienRioux/planned-interview/assets/26312935/d8af00d5-4026-46f1-b030-77c75b6677ce">
 
-## Tasks
+## Design Token approach
 
-- Retrieve users from the 3 endpoints when clicking the "Retrieve Users" button
-- Order the users from the 3 collections by name ascending followed by the age descending
-- Implement a filter for the age based on the min and max values of the inputs
-- We recommend using the `styled-components` library to style your components
+To enhance usability and ensure consistent styling throughout the application, I have adopted a tokenized approach for styling components. The corresponding logic can be found within the `src/theme folder.` Additionally, I have included types to the theme to enable IntelliSense functionality.
 
-### Happy coding!
+<img width="980" alt="image" src="https://github.com/JulienRioux/planned-interview/assets/26312935/71567e52-0f27-4a78-8f9d-8b251dccfd41">
