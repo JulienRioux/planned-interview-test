@@ -11,14 +11,17 @@ export const Input: FunctionComponent<InputProps> = ({
   return (
     <InputWrapper>
       {props.type === "search" && !leftText && (
-        <LeftText>
+        <LeftText data-testid="input-search-icon">
           <IconSearch />
         </LeftText>
       )}
-      {leftText && <LeftText>{leftText}</LeftText>}
+      {leftText && (
+        <LeftText data-testid="input-left-text">{leftText}</LeftText>
+      )}
       <InputComponent
         $hasSearchIcon={props.type === "search"}
         $hasLeftText={!!leftText}
+        data-testid="input-component"
         {...props}
       />
     </InputWrapper>

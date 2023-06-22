@@ -30,16 +30,16 @@ global.fetch = jest.fn().mockImplementation((url: string) => {
 });
 
 // Setting up test variables for input changes
-const MIN_VALUE = 10;
-const MAX_VALUE = 50;
+const MIN_AGE_VALUE = 10;
+const MAX_AGE_VALUE = 50;
 const SEARCH_TEXT_VALUE = "bob";
 
 const minValEvent = {
-  target: { name: "minAge", value: MIN_VALUE },
+  target: { name: "minAge", value: MIN_AGE_VALUE },
 } as unknown as FormEvent<HTMLInputElement>;
 
 const maxValEvent = {
-  target: { name: "maxAge", value: MAX_VALUE },
+  target: { name: "maxAge", value: MAX_AGE_VALUE },
 } as unknown as FormEvent<HTMLInputElement>;
 
 const searchTextEvent = {
@@ -76,8 +76,8 @@ describe("useUsers", () => {
       result.current.handleFiltersChange(searchTextEvent);
     });
 
-    expect(result.current.minAge).toBe(MIN_VALUE);
-    expect(result.current.maxAge).toBe(MAX_VALUE);
+    expect(result.current.minAge).toBe(MIN_AGE_VALUE);
+    expect(result.current.maxAge).toBe(MAX_AGE_VALUE);
     expect(result.current.searchText).toBe(SEARCH_TEXT_VALUE);
   });
 
@@ -132,8 +132,8 @@ describe("useUsers", () => {
       await result.current.handleFiltersChange(maxValEvent);
     });
 
-    expect(result.current.minAge).toBe(MIN_VALUE);
-    expect(result.current.maxAge).toBe(MAX_VALUE);
+    expect(result.current.minAge).toBe(MIN_AGE_VALUE);
+    expect(result.current.maxAge).toBe(MAX_AGE_VALUE);
     expect(result.current.searchText).toBe(SEARCH_TEXT_VALUE);
     // Making sure we're not fetching users before calling `getUsers`.
     expect(result.current.users).toStrictEqual([]);
