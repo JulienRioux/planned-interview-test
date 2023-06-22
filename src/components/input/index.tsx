@@ -6,6 +6,7 @@ import { IconSearch } from "../icons/search";
 
 export const SEARCH_ICON_SIZE = 16;
 
+/** Input component that renders a search icon if type === "search" and allow a floating left text (i.e. Min, Max, etc). */
 export const Input: FunctionComponent<InputProps> = ({
   leftText,
   ...props

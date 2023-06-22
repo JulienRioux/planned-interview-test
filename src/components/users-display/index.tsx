@@ -2,14 +2,9 @@ import * as React from "react";
 
 import Card from "../card";
 import { Hr } from "../hr";
-import styled from "styled-components";
-import { token } from "../../theme";
 import { SearchFilter } from "../search-filter";
 import { UsersTable } from "../users-table";
-
-const SectionWrapper = styled.div`
-  padding: ${token("$card-padding")};
-`;
+import { SectionWrapper } from "./styles";
 
 export const UsersDisplay = () => {
   return (

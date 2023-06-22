@@ -1,3 +1,5 @@
+// Fixtures used in our tests.
+
 export const KIDS_DATA = {
   data: [
     {

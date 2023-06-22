@@ -5,6 +5,9 @@ import { SortButton, TableWrapper } from "./styles";
 import IconSortArrows from "../icons/sort-arrows";
 import { ITableRow } from "./types";
 
+/** Simple Table component.
+ *  Note: Ordering could be made inside the component too (See https://github.com/ant-design/ant-design/tree/master/components/table).
+ */
 export const Table = ({
   columns,
   rows,

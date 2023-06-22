@@ -14,15 +14,17 @@ const [INITIAL_MIN_AGE, INITIAL_MAX_AGE] = [0, 100];
 export const UserProvider = ({ children }: UserProviderProps) => {
   // This is the data coming from the API (Will not changed unless re-trigerring the "Retrieve Users" button.)
   const [users, setUsers] = useState<IUser[]>([]);
-  // This is the filtered dataset
+  // This is the filtered dataset (Users that we're displaying to the UI.)
   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
+
   // Handling the min/max age and text search filters
   const [minAge, setMinAge] = useState(INITIAL_MIN_AGE);
   const [maxAge, setMaxAge] = useState(INITIAL_MAX_AGE);
   const [searchText, setSearchText] = useState("");
 
+  // Handing all filters
   const handleFiltersChange = useCallback((e) => {
     if (e.target.name === "minAge") {
       setMinAge(e.target.value);
@@ -35,6 +37,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   }, []);
 
+  // Make sure the min/max age input are not empty.
   const handleMinMaxBlur = useCallback((e) => {
     // Make sure the data are always in a good state
     if (e.target.name === "minAge" && e.target.value === "") {
@@ -45,6 +48,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   }, []);
 
+  // Fetching the users
   const getUsers = useCallback(async () => {
     setIsLoading(true);
     // Reset the data when refetching new users
@@ -84,11 +88,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     } finally {
       setIsLoading(false);
     }
-
-    setIsLoading(false);
   }, []);
 
-  // Deal with filters
+  // Deal with filters automatically when they're changing.
   useEffect(() => {
     // Filter users based on minAge and maxAge
     const usersFilteredByAge = users.filter(
@@ -98,17 +100,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const filteredByText = usersFilteredByAge.filter((obj) =>
       obj.name.toLowerCase().includes(searchText)
     );
+    // Set the filtered users array.
     setFilteredUsers(filteredByText);
   }, [maxAge, minAge, searchText, users]);
-
-  const FETCH_USER_ON_LOAD = false;
-
-  useEffect(() => {
-    if (FETCH_USER_ON_LOAD) {
-      // Fetching users from start
-      getUsers();
-    }
-  }, [FETCH_USER_ON_LOAD, getUsers]);
 
   const getCtx = useCallback(() => {
     return {
