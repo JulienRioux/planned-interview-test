@@ -22,9 +22,9 @@ const IconSortArrows: FunctionComponent<IconSortArrowsProps> = ({
       <g
         id="Admin"
         stroke="none"
-        stroke-width="1"
+        strokeWidth="1"
         fill="none"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       >
         <g id="sort-arrows" transform="translate(-6.000000, -6.000000)">
           <g id="Group-14-Copy-2">

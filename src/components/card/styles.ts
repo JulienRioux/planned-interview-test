@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { token } from "../../theme";
 
 export const CardWrapper = styled.div`
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #0001;
-  box-shadow: 0 4px 10px #00000011;
+  background: ${token("$card-bg-color")};
+  border-radius: ${token("$card-border-radius")};
+  border: ${token("$card-border")};
+  box-shadow: ${token("$card-box-shadow")};
 `;

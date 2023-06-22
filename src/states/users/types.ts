@@ -10,6 +10,16 @@ export interface IUser {
   uid: string;
 }
 
+export interface IUserFromDB {
+  age: number;
+  country: string;
+  email: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+}
+
 export interface IUsersContext {
   isLoading: boolean;
   users: IUser[];

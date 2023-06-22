@@ -1,13 +1,14 @@
 import styled from "styled-components";
+import { ColorToken } from "../../theme";
 
 export const TopNavWrapper = styled.div`
+  border-bottom: 1px solid ${ColorToken.Black200};
+  background: ${ColorToken.White};
   display: flex;
   align-items: center;
   gap: 20px;
-  border-bottom: 1px solid #0002;
   position: sticky;
   top: 0;
-  background: #fff;
   z-index: 9;
 `;
 

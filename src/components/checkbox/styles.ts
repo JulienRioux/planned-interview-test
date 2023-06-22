@@ -3,10 +3,11 @@ import { token } from "../../theme";
 
 export const CheckboxInput = styled.input`
   border: ${token("$input-border")};
+  border-radius: ${token("$checkbox-border-radius")};
+  height: ${token("$checkbox-size")};
+  width: ${token("$checkbox-size")};
+  accent-color: ${token("$checkbox-accent-color")};
+
   cursor: pointer;
-  border-radius: 4px;
   margin: 0;
-  height: 14px;
-  width: 14px;
-  accent-color: #000;
 `;

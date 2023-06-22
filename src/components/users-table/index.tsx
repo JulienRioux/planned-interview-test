@@ -3,12 +3,7 @@ import * as React from "react";
 import { Table } from "../table";
 import Checkbox from "../checkbox";
 import { useUsers } from "../../hooks/use-users";
-import styled from "styled-components";
-
-const NoDataText = styled.div`
-  font-size: 14px;
-  color: #8c9aad;
-`;
+import { NoDataText } from "./styles";
 
 const TABLE_COLUMNS = [
   {
@@ -18,11 +13,13 @@ const TABLE_COLUMNS = [
   {
     content: "Name",
     key: "name",
+    // Only console.log for the moment.
     sorter: () => console.log("Sorting by names..."),
   },
   {
     content: "Age",
     key: "age",
+    // Only console.log for the moment.
     sorter: () => console.log("Sorting by ages..."),
   },
 ];
@@ -33,7 +30,7 @@ export const UsersTable = () => {
   return users.length ? (
     <Table
       columns={TABLE_COLUMNS}
-      rows={users.map(({ name, age, uid }: any, index: number) => (
+      rows={users.map(({ name, age, uid }, index: number) => (
         <tr key={uid}>
           <td>
             <Checkbox />
