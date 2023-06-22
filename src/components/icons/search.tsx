@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FunctionComponent } from "react";
+import { ColorToken } from "../../theme";
 
 interface IconSearchProps {
   size?: number;
@@ -10,7 +11,7 @@ interface IconSearchProps {
 export const IconSearch: FunctionComponent<IconSearchProps> = ({
   size = 16,
   strokeWidth = 2,
-  color = "#777",
+  color = ColorToken.LightGrey,
 }) => {
   return (
     <svg

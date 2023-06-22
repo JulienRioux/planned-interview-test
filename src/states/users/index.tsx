@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createContext, useCallback, useEffect, useState } from "react";
-import { IUser, IUsersContext, UserProviderProps } from "./types";
+import { IUser, IUserFromDB, IUsersContext, UserProviderProps } from "./types";
 import { API_URL, USER_ROUTES } from "../../configs";
 import { sortUsers } from "../../utils/sort";
 import { formatUser } from "../../utils/format-user";
@@ -62,11 +62,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
           // TODO: refactor this
           // Formatting the users before storing them.
           if (index === 2) {
-            return fetchedUser.map((user: any, index: number) =>
+            return fetchedUser.map((user: IUserFromDB, index: number) =>
               formatUser(user, index)
             );
           }
-          return fetchedUser.data.map((user: any, index: number) =>
+          return fetchedUser.data.map((user: IUserFromDB, index: number) =>
             formatUser(user, index)
           );
         })

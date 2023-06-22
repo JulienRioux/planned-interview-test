@@ -1,5 +1,7 @@
+import { IUserFromDB } from "../../states/users/types";
+
 export const formatUser = (
-  { name: { firstName, lastName }, age }: any,
+  { name: { firstName, lastName }, age }: IUserFromDB,
   index: number
 ) => ({
   name: `${firstName} ${lastName}`,

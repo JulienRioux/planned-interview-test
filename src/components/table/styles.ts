@@ -1,19 +1,19 @@
 import styled from "styled-components";
+import { ColorToken, token } from "../../theme";
 
 export const TableWrapper = styled.div`
-  font-size: 14px;
-  text-align: left;
+  font-size: ${token("$table-font-size")};
+  text-align: ${token("$table-text-align")};
 
   table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: auto;
   }
 
   tr {
     display: grid;
     grid-template-columns: 40px 1fr 1fr;
-    border-bottom: 1px solid #0001;
+    border-bottom: ${token("$table-border")};
 
     &:last-of-type {
       border: none;
@@ -29,7 +29,7 @@ export const TableWrapper = styled.div`
   }
 
   thead {
-    font-weight: bold;
+    font-weight: ${token("$table.thead-font-weight")};
   }
 `;
 
@@ -43,7 +43,7 @@ export const SortButton = styled.button`
   transition: 0.2s;
 
   :hover {
-    background: #0001;
+    background: ${ColorToken.Black100};
     border-radius: 2px;
   }
 `;

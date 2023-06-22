@@ -33,7 +33,7 @@ export const UsersTable = () => {
   return users.length ? (
     <Table
       columns={TABLE_COLUMNS}
-      rows={users.map(({ name, age, uid }: any, index: number) => (
+      rows={users.map(({ name, age, uid }, index: number) => (
         <tr key={uid}>
           <td>
             <Checkbox />

@@ -9,18 +9,18 @@ export const InputComponent = styled.input<{
   background: ${token("$input-background")};
   border-radius: ${token("$input-border-radius")};
   padding: ${token("$input-padding")};
+  font-size: ${token("$input-font-size")};
+
   width: -webkit-fill-available;
   outline: none;
   transition: 0.2s;
-  font-size: 14px;
 
   &:focus {
-    border: 1px solid #000;
-    background: #fff;
+    border-color: ${token("$input:focus-border-color")};
   }
 
   &::placeholder {
-    color: #777;
+    color: ${token("$input-placeholder-color")};
   }
 
   // TODO: Make this a variable
@@ -36,6 +36,9 @@ export const InputWrapper = styled.div`
 `;
 
 export const LeftText = styled.div`
+  font-size: ${token("$input-font-size")};
+  color: ${token("$input-placeholder-color")};
+
   position: absolute;
   top: 0;
   bottom: 0;
@@ -44,8 +47,6 @@ export const LeftText = styled.div`
   align-items: center;
   jusitify-content: center;
   padding: 8px;
-  font-size: 14px;
   width: 36px;
   pointer-events: none;
-  color: #777;
 `;

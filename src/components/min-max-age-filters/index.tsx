@@ -14,8 +14,6 @@ const MinMaxAgeFilters = () => {
         onChange={handleFiltersChange}
         leftText="Min"
         min={0}
-        max={maxAge}
-        required
         onBlur={handleMinMaxBlur}
       />
       <Input
@@ -24,9 +22,8 @@ const MinMaxAgeFilters = () => {
         type="number"
         onChange={handleFiltersChange}
         leftText="Max"
-        min={minAge}
+        min={0}
         onBlur={handleMinMaxBlur}
-        required
       />
     </>
   );
