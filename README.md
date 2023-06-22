@@ -21,10 +21,12 @@ To run the tests, you can use the command `yarn test` or `yarn jest --watchAll`.
 
 I had to add a few package to do so and update a few package in order to make everything works. Please note that I did not upgrade all packages and did not use all the latest package available. For a production app, I would have upgrade most of the package since the repo is +/- 3 years old but I think it's ok for this demo.
 
-<img width="811" alt="" src="https://github.com/JulienRioux/planned-interview/assets/26312935/d8af00d5-4026-46f1-b030-77c75b6677ce">
+<img width="817" alt="image" src="https://github.com/JulienRioux/planned-interview-test/assets/26312935/704187eb-7816-4bad-8ab6-4549bcdbd94c">
+
 
 ## Design Token approach
 
 To enhance usability and ensure consistent styling throughout the application, I have adopted a tokenized approach for styling components. The corresponding logic can be found within the `src/theme folder.` Additionally, I have included types to the theme to enable IntelliSense functionality.
 
-<img width="980" alt="image" src="https://github.com/JulienRioux/planned-interview/assets/26312935/71567e52-0f27-4a78-8f9d-8b251dccfd41">
+<img width="1238" alt="image" src="https://github.com/JulienRioux/planned-interview-test/assets/26312935/2d41a0cc-28dd-4525-9867-99eee9fe98ad">
+
